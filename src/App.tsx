@@ -82,7 +82,7 @@ function App() {
 
 
             <div className='btn_sortear_container'>
-              <button className="button-42" onClick={handleSort} role="button">Sortear</button>
+              <button disabled={completePrize?.stock === '0'} style={{background: completePrize?.stock === '0' ? 'gray' : ''}} className="button-42" onClick={handleSort} role="button">Sortear</button>
             </div>
 
             <div
@@ -111,7 +111,7 @@ function App() {
             </div>
             <h2 className='ganadores_title'>Ganadores:</h2>
             <div className='ganadores_container'>
-              {completePrize?.stock === '0' && <p style={{color: '#ff0800'}}></p>}
+              {completePrize?.stock === '0' && <p style={{color: '#ff0800'}}>Producto no disponible</p>}
               {
                 winners?.map(winner => <p style={{fontSize: '20px', fontWeight: 'bold'}}>{winner.name}</p>)
               }
