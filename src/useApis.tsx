@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
-import { getCattegory, sortPrices } from "./services/services"
-import { Prize, Winner } from "./services/interfaces"
+import { getCattegory, getPrice, sortPrices } from "./services/services"
+import { Winner } from "./services/interfaces"
 const animationDuration = 5000; // Duración simulada de la carga en milisegundos (5 segundos)
 
 const useApis = () => {
@@ -9,7 +9,6 @@ const useApis = () => {
   const [cattegory, setCattegory] = useState('')
   const [price, setPrice] = useState('');
   const [isSuccess, setIsSuccess] = useState(false)
-  const [completePrize, setCompletePrize] = useState<Prize>()
   const [winners, setWinners] = useState<Winner[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [progress, setProgress] = useState(0); // Nuevo estado para el progreso
@@ -22,6 +21,13 @@ const useApis = () => {
     retry: 1,
     enabled: cattegory !== ''
   })
+
+  const { data: completePrize, refetch: refetchPrice } = useQuery({
+    queryKey: ['price'],
+    queryFn: ()=>getPrice(price),
+    retry: 1,
+  })
+
 
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -65,7 +71,8 @@ const useApis = () => {
   useEffect(() => {
     setIsSuccess(false);
     setProgress(0);
-    setWinners([])
+    setWinners([]);
+    refetchPrice();
   }, [price, cattegory])
 
 
@@ -75,7 +82,6 @@ const useApis = () => {
     handleChange,
     handleChangePrize,
     handleSort,
-    setCompletePrize,
     completePrize,
     winners,
     isLoading,
