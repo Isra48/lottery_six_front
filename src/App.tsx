@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css'
+import 'animate.css';
 import Tittle from './assets/tittle.png'
 import Esfera from './assets/esfera.png'
 import Logos from './assets/logos.png'
@@ -18,6 +19,30 @@ function App() {
     };
   }, []);
 
+
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    let animationCount = 0;
+    //const maxRepeats = 3; // Número de repeticiones
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 2000); // Duración de cada animación
+
+      animationCount += 1;
+      if (animationCount >= maxRepeats) {
+        clearInterval(interval);
+      }
+    }, 3000); // Intervalo entre repeticiones
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+
   return (
     <>
       {isSmallScreen ? (
@@ -34,7 +59,11 @@ function App() {
       ) : (
         <div className='container_father'>
           <div className='col1'>
-            <div className='title_container'>
+            <div 
+            
+            className={`title_container  animate__animated ${isAnimating ? 'animate__swing' : ''}`}
+             style={{ '--animate-duration': '2s' } as React.CSSProperties}
+            >
               <img src={Tittle} alt="imagen titulo" />
             </div>
          
@@ -60,7 +89,11 @@ function App() {
             <div className='btn_sortear_container'>
               <button className="button-42" role="button">Sortear</button>
             </div>
-            <div className='esfera_container'>
+            <div 
+             className={`esfera_container  animate__animated ${isAnimating ? 'animate__bounce' : ''}`}
+             style={{ '--animate-duration': '2s' } as React.CSSProperties}
+            
+            >
               <img src={Esfera} alt="imagen esfera" />
             </div>
           </div>

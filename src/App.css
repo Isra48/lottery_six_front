@@ -131,6 +131,7 @@ select {
   cursor: pointer;
   display: inline-block;
   font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size: 1.2em;
   height: 50px;
   line-height: 40px;
   outline: 0;
@@ -165,6 +166,7 @@ select {
   z-index: 2 !important;
   position: relative;
   display: block;
+ 
   
 }
 
@@ -241,3 +243,15 @@ select {
   background-size: cover; 
   z-index: 1;
 }
+
+.animate__swing {
+  --animate-duration: 1.8s; /* Cambia la duración de la animación */
+}
+
+.animate__bounce{
+  z-index: 2;
+  --animate-duration: 3s; 
+}
+
+
+
