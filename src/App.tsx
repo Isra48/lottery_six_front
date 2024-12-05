@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import './App.css';
 import 'animate.css';
-import Tittle from './assets/tittle.png'
-import Esfera from './assets/esfera.png'
-import Logos from './assets/logos.png'
+
+
+import Tittle from './assets/tittle.png';
+import Esfera from './assets/esfera.png';
+import Logos from './assets/logos.png';
 import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { cattegory, data, handleChange, handleChangePrize, handleSort, winners, setCompletePrize, completePrize, } = useApis()
+  const { cattegory, data: categories, handleChange, handleChangePrize, handleSort, winners, setCompletePrize, completePrize, isSuccess, progress} = useApis()
+  const [isAnimating, setIsAnimating] = useState(false);
+
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -21,20 +25,12 @@ function App() {
     };
   }, []);
 
-
-  const [isAnimating, setIsAnimating] = useState(false);
-
   useEffect(() => {
-    
-    //const maxRepeats = 3; // Número de repeticiones
     const interval = setInterval(() => {
       setIsAnimating(true);
-
       setTimeout(() => {
         setIsAnimating(false);
-      }, 2000); // Duración de cada animación
-
-  
+      }, 2000); // Duración de cada animación cíclica
     }, 3000); // Intervalo entre repeticiones
 
     return () => clearInterval(interval);
@@ -54,12 +50,13 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className='container_father'>
-          <div className='col1'>
-            <div 
-            
-            className={`title_container  animate__animated ${isAnimating ? 'animate__swing' : ''}`}
-             style={{ '--animate-duration': '2s' } as React.CSSProperties}
+        <div className="container_father">
+          <div className="col1">
+            <div
+              className={`title_container animate__animated ${
+                isAnimating ? 'animate__swing' : ''
+              }`}
+              style={{ '--animate-duration': '2s' } as React.CSSProperties}
             >
               <img src={Tittle} alt="imagen titulo" />
             </div>
@@ -79,7 +76,7 @@ function App() {
           <div className='select_container2'>
             <select onChange={handleChangePrize}>
               <option selected value="0">Premio:</option>
-              {data?.prizes.map(prize => <option onClick={()=>setCompletePrize(prize)} value={prize.id}>{prize.title}</option>)}
+              {categories?.prizes.map(prize => <option onClick={()=>setCompletePrize(prize)} value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 
@@ -87,34 +84,42 @@ function App() {
             <div className='btn_sortear_container'>
               <button className="button-42" onClick={handleSort} role="button">Sortear</button>
             </div>
-            <div 
-             className={`esfera_container  animate__animated ${isAnimating ? 'animate__bounce' : ''}`}
-             style={{ '--animate-duration': '2s' } as React.CSSProperties}
-            
+
+            <div
+              className={`esfera_container animate__animated ${
+                isAnimating ? 'animate__bounce' : ''
+              }`}
+              style={{ '--animate-duration': '2s' } as React.CSSProperties}
             >
               <img src={Esfera} alt="imagen esfera" />
             </div>
           </div>
 
-          <div className='col2'>
-            <div className='logos_container'>
-              <img src={Logos} alt="" />
+          <div className="col2">
+            <div className="logos_container">
+              <img src={Logos} alt="Logos" />
             </div>
 
-            <div className='tittle_premio'>
-              <p>Cargando...</p>
+            <div className="tittle_premio">
+              <p style={{textAlign: 'center', marginBottom: '-.5em'}}>{isSuccess  ? '¡Tenemos Ganadores!' : 'Cargando...'}</p>
+              <div className="progress-bar">
+                <div
+                  className="progress-bar-inner"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
             </div>
             <h2 className='ganadores_title'>Ganadores:</h2>
             <div className='ganadores_container'>
-            
+              {completePrize?.stock === '0' && <p style={{color: '#ff0800'}}></p>}
               {
-                winners?.map(winner => <p>{winner.name}</p>)
+                winners?.map(winner => <p style={{fontSize: '20px', fontWeight: 'bold'}}>{winner.name}</p>)
               }
             </div>
           </div>
         </div>
       )}
-      <div className='footer'> </div>
+      <div className="footer"> </div>
     </>
   );
 }
