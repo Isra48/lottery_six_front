@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
-import './App.css'
+import './App.css';
 import 'animate.css';
-import Tittle from './assets/tittle.png'
-import Esfera from './assets/esfera.png'
-import Logos from './assets/logos.png'
+import Player from 'lottie-react';
+import loadingAnimation from './assets/Animation.json';
+
+import Tittle from './assets/tittle.png';
+import Esfera from './assets/esfera.png';
+import Logos from './assets/logos.png';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<string[]>([]);
 
+  const animationDuration = 5000; // Duración de la animación principal en milisegundos
+
+  // Detecta el tamaño de la pantalla
   useEffect(() => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth < 1200);
@@ -19,26 +28,33 @@ function App() {
     };
   }, []);
 
-
-  const [isAnimating, setIsAnimating] = useState(false);
-
+  // Controla las animaciones cíclicas
   useEffect(() => {
-    
-    //const maxRepeats = 3; // Número de repeticiones
     const interval = setInterval(() => {
       setIsAnimating(true);
-
       setTimeout(() => {
         setIsAnimating(false);
-      }, 2000); // Duración de cada animación
-
-  
+      }, 2000); // Duración de cada animación cíclica
     }, 3000); // Intervalo entre repeticiones
 
     return () => clearInterval(interval);
   }, []);
 
+  // Controla el estado de carga
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
 
+      // Espera el tiempo de duración de la animación principal
+      await new Promise((resolve) => setTimeout(resolve, animationDuration));
+
+      // Simula datos cargados
+      setData(['Isra', 'Gera', 'Isra', 'Gera', 'Isra', 'Gera']);
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -54,75 +70,84 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className='container_father'>
-          <div className='col1'>
-            <div 
-            
-            className={`title_container  animate__animated ${isAnimating ? 'animate__swing' : ''}`}
-             style={{ '--animate-duration': '2s' } as React.CSSProperties}
+        <div className="container_father">
+          <div className="col1">
+            {/* Animación de título */}
+            <div
+              className={`title_container animate__animated ${
+                isAnimating ? 'animate__swing' : ''
+              }`}
+              style={{ '--animate-duration': '2s' } as React.CSSProperties}
             >
               <img src={Tittle} alt="imagen titulo" />
             </div>
-         
-           <div className='select_container'>
-            <select>
-              <option selected value="0">Categoria:</option>
-              <option value="1">No Wrapper</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
-            </select>
-          </div>
 
-          <div className='select_container2'>
-            <select>
-              <option selected value="0">Premio:</option>
-              <option value="1">No Wrapper</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
-            </select>
-          </div>
-
-
-            <div className='btn_sortear_container'>
-              <button className="button-42" role="button">Sortear</button>
+            {/* Dropdowns */}
+            <div className="select_container">
+              <select defaultValue="0">
+                <option value="0">Categoria:</option>
+                <option value="1">No Wrapper</option>
+                <option value="2">No JS</option>
+                <option value="3">Nice!</option>
+              </select>
             </div>
-            <div 
-             className={`esfera_container  animate__animated ${isAnimating ? 'animate__bounce' : ''}`}
-             style={{ '--animate-duration': '2s' } as React.CSSProperties}
-            
+
+            <div className="select_container2">
+              <select defaultValue="0">
+                <option value="0">Premio:</option>
+                <option value="1">No Wrapper</option>
+                <option value="2">No JS</option>
+                <option value="3">Nice!</option>
+              </select>
+            </div>
+
+            {/* Botón */}
+            <div className="btn_sortear_container">
+              <button className="button-42" role="button">
+                Sortear
+              </button>
+            </div>
+
+            {/* Animación de la esfera */}
+            <div
+              className={`esfera_container animate__animated ${
+                isAnimating ? 'animate__bounce' : ''
+              }`}
+              style={{ '--animate-duration': '2s' } as React.CSSProperties}
             >
               <img src={Esfera} alt="imagen esfera" />
             </div>
           </div>
 
-          <div className='col2'>
-            <div className='logos_container'>
-              <img src={Logos} alt="" />
+          <div className="col2">
+            {/* Logos */}
+            <div className="logos_container">
+              <img src={Logos} alt="Logos" />
             </div>
 
-            <div className='tittle_premio'>
+            {/* Título de ganadores */}
+            <div className="tittle_premio">
               <p>Cargando...</p>
             </div>
-            <h2 className='ganadores_title'>Ganadores:</h2>
-            <div className='ganadores_container'>
-            
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
+
+            {/* Animación de carga o datos */}
+            <h2 className="ganadores_title">Ganadores:</h2>
+            <div className="ganadores_container">
+              {isLoading ? (
+                <Player
+                  autoplay
+                  loop
+                  animationData={loadingAnimation}
+                  style={{ height: '400px', width: '600px' }}
+                />
+              ) : (
+                data.map((item, index) => <p key={index}>{item}</p>)
+              )}
             </div>
           </div>
         </div>
       )}
-      <div className='footer'> </div>
+      <div className="footer"> </div>
     </>
   );
 }
