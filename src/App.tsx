@@ -10,13 +10,9 @@ import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { cattegory, data: categories, handleChange, handleChangePrize, handleSort, winners, setCompletePrize, completePrize, isSuccess, progress} = useApis()
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0); // Nuevo estado para el progreso
-  const [data, setData] = useState<string[]>([]);
 
-  const animationDuration = 5000; // Duración simulada de la carga en milisegundos (5 segundos)
-  const { cattegory, handleChange } = useApis()
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -39,32 +35,6 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      // Inicia el progreso
-      const interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 1; // Incrementa el progreso cada 50ms
-        });
-      }, animationDuration / 100);
-
-      // Simula la carga de datos de la API
-      await new Promise((resolve) => setTimeout(resolve, animationDuration));
-
-      setData(['Isra', 'Gera', 'Isra', 'Gera', 'Isra', 'Gera']); // Simula datos cargados
-      setIsLoading(false);
-      setProgress(100); // Asegura que el progreso llegue al 100%
-    };
-
-    fetchData();
-  }, [animationDuration]);
 
   return (
     <>
@@ -92,27 +62,27 @@ function App() {
             </div>
          
            <div className='select_container'>
-            <select>
-              <option selected value="0">Categoria:</option>
-              <option value="1">No Wrapper</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
+            <select value={cattegory} onChange={handleChange}>
+              <option defaultChecked value="0">Categoria:</option>
+              <option value="MOVILIDAD">MOVILIDAD</option>
+              <option value="MOVILIDAD_VIP">MOVILIDAD VIP</option>
+              <option value="HOGAR">HOGAR</option>
+              <option value="HOGAR_VIP">HOGAR VIP</option>
+              <option value="CONECTIVIDAD">CONECTIVIDAD</option>
+              <option value="CONECTIVIDAD_VIP">CONETIVIDAD VIP</option>
             </select>
           </div>
 
           <div className='select_container2'>
-            <select>
+            <select onChange={handleChangePrize}>
               <option selected value="0">Premio:</option>
-              <option value="1">No Wrapper</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
+              {categories?.prizes.map(prize => <option onClick={()=>setCompletePrize(prize)} value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 
-            <div className="btn_sortear_container">
-              <button className="button-42" role="button">
-                Sortear
-              </button>
+
+            <div className='btn_sortear_container'>
+              <button className="button-42" onClick={handleSort} role="button">Sortear</button>
             </div>
 
             <div
@@ -131,7 +101,7 @@ function App() {
             </div>
 
             <div className="tittle_premio">
-              <p style={{textAlign: 'center', marginBottom: '-.5em'}}>{isLoading ? 'Cargando...' : '¡Tenemos Ganadores!'}</p>
+              <p style={{textAlign: 'center', marginBottom: '-.5em'}}>{isSuccess  ? '¡Tenemos Ganadores!' : 'Cargando...'}</p>
               <div className="progress-bar">
                 <div
                   className="progress-bar-inner"
@@ -139,14 +109,12 @@ function App() {
                 ></div>
               </div>
             </div>
-
-            <h2 className="ganadores_title">Ganadores:</h2>
-            <div className="ganadores_container">
-              {isLoading ? (
-              <></>
-              ) : (
-                data.map((item, index) => <p key={index}>{item}</p>)
-              )}
+            <h2 className='ganadores_title'>Ganadores:</h2>
+            <div className='ganadores_container'>
+              {completePrize?.stock === '0' && <p style={{color: '#ff0800'}}></p>}
+              {
+                winners?.map(winner => <p style={{fontSize: '20px', fontWeight: 'bold'}}>{winner.name}</p>)
+              }
             </div>
           </div>
         </div>

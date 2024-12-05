@@ -211,6 +211,10 @@ select {
   width: 0;
   background-color: #4caf50; /* Color de la barra de progreso */
   border-radius: 16px;
+
+}
+
+.progress-bar-inner.active{
   animation: progressAnimation 5s linear ;
 }
 
