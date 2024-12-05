@@ -10,7 +10,7 @@ import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { cattegory, data: categories, handleChange, handleChangePrize, handleSort, winners, setCompletePrize, completePrize, isSuccess, progress} = useApis()
+  const { cattegory, data: categories, handleChange, handleChangePrize, handleSort, winners, completePrize, isSuccess, progress} = useApis()
   const [isAnimating, setIsAnimating] = useState(false);
 
 
@@ -76,7 +76,7 @@ function App() {
           <div className='select_container2'>
             <select onChange={handleChangePrize}>
               <option selected value="0">Premio:</option>
-              {categories?.prizes.map(prize => <option onClick={()=>setCompletePrize(prize)} value={prize.id}>{prize.title}</option>)}
+              {categories?.prizes.map(prize => <option value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 

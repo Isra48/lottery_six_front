@@ -1,4 +1,4 @@
-import { Category, Winner } from "./interfaces"
+import { Category, Prize, Winner } from "./interfaces"
 
 const BASE_URL = "https://lottery-sixflags-back-production.up.railway.app/api"
 
@@ -24,4 +24,14 @@ export const sortPrices = async (id: string): Promise<Winner[]> => {
   }
   return await response.json()
 
+}
+
+export const getPrice = async(id: string): Promise<Prize> => {
+  const response = await fetch(`${BASE_URL}/prize/${id}`, 
+    {method: "GET"}
+  )
+  if(!response.ok){
+    throw new Error('Error' + response.status)
+  }
+  return await response.json()
 }
