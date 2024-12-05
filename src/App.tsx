@@ -101,7 +101,7 @@ function App() {
             </div>
 
             <div className="tittle_premio">
-              <p style={{textAlign: 'center', marginBottom: '-.5em'}}>{isSuccess  ? '¡Tenemos Ganadores!' : 'Cargando...'}</p>
+              <p style={{textAlign: 'center', marginBottom: '-.5em'}}>{isSuccess  ? '¡Tenemos Ganadores!' : 'Buscando ganadores...'}</p>
               <div className="progress-bar">
                 <div
                   className="progress-bar-inner"
