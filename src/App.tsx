@@ -6,6 +6,7 @@ import 'animate.css';
 import Tittle from './assets/tittle.png';
 import Esfera from './assets/esfera.png';
 import Logos from './assets/logos.png';
+import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -15,6 +16,7 @@ function App() {
   const [data, setData] = useState<string[]>([]);
 
   const animationDuration = 5000; // Duración simulada de la carga en milisegundos (5 segundos)
+  const { cattegory, handleChange } = useApis()
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -88,24 +90,24 @@ function App() {
             >
               <img src={Tittle} alt="imagen titulo" />
             </div>
+         
+           <div className='select_container'>
+            <select>
+              <option selected value="0">Categoria:</option>
+              <option value="1">No Wrapper</option>
+              <option value="2">No JS</option>
+              <option value="3">Nice!</option>
+            </select>
+          </div>
 
-            <div className="select_container">
-              <select defaultValue="0">
-                <option value="0">Categoria:</option>
-                <option value="1">No Wrapper</option>
-                <option value="2">No JS</option>
-                <option value="3">Nice!</option>
-              </select>
-            </div>
-
-            <div className="select_container2">
-              <select defaultValue="0">
-                <option value="0">Premio:</option>
-                <option value="1">No Wrapper</option>
-                <option value="2">No JS</option>
-                <option value="3">Nice!</option>
-              </select>
-            </div>
+          <div className='select_container2'>
+            <select>
+              <option selected value="0">Premio:</option>
+              <option value="1">No Wrapper</option>
+              <option value="2">No JS</option>
+              <option value="3">Nice!</option>
+            </select>
+          </div>
 
             <div className="btn_sortear_container">
               <button className="button-42" role="button">
