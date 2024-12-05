@@ -1,9 +1,9 @@
 .container_father{
   display: flex;
   margin: 3em;
-  border: 1px solid white;
+
   height: 80vh;
-  padding-top: 3em;
+  padding-top: 2em;
 
   
 }
@@ -21,7 +21,6 @@
   width: 50%;
 }
 
-
 .title_container img{
   width: 400px;
   aspect-ratio: 2/1;
@@ -30,8 +29,6 @@
   z-index: 2;
   
 }
-
-
 /* Style The Dropdown Button */
 .dropbtn {
   background-color: #f1f1f1;
@@ -47,7 +44,7 @@
 }
 
 .dropdown {
- margin-top: 1em;
+ margin-top: 0em;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -125,9 +122,6 @@
 }
 
 /*Imagen de esfera*/
-
-
-
 .esfera_container img{
   margin-top: 1em;
   width: 350px;
@@ -140,7 +134,60 @@
   
 }
 
+/*************************************/
+/*col2 */
+.logos_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
+.logos_container img{
+  margin-top: 1em ;
+  width: 90%;
+  object-fit: cover;
+}
+.tittle_premio{
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  color: white;
+  font-size: 1.2em;
+  background-color: #121822;
+  border-radius: 16px;
+}
 
+.ganadores_container{
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  max-height: 300px;
+  margin-top: 2em;
+  overflow-y: auto; /* Habilitar scroll vertical */
+  overflow-x: hidden; /* Ocultar scroll horizontal */
+  scroll-behavior: smooth; /* Desplazamiento suave */
+  z-index: 2;
+  padding: 1em 2em;
+  opacity: 0.9;
+
+}
+/* Personalización del scroll */
+.ganadores_container::-webkit-scrollbar {
+  width: 6px; /* Ancho de la barra de scroll */
+}
+
+.ganadores_container::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.4); /* Color del "pulgar" de la barra */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.ganadores_container::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.6); /* Cambio de color al hover */
+}
+
+.ganadores_container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Fondo de la barra */
+  border-radius: 10px;
+}
 
 
 
