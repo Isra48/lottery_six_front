@@ -192,12 +192,18 @@ select {
   background-color: #121822;
   border-radius: 16px;
 }
+.ganadores_title{
+  color: #f9f9f9;
+  text-align: center;
+
+}
+
 
 .ganadores_container{
   background-color: #f9f9f9;
   border-radius: 16px;
   max-height: 300px;
-  margin-top: 2em;
+
   overflow-y: auto; /* Habilitar scroll vertical */
   overflow-x: hidden; /* Ocultar scroll horizontal */
   scroll-behavior: smooth; /* Desplazamiento suave */

@@ -23,7 +23,7 @@ function App() {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    let animationCount = 0;
+    
     //const maxRepeats = 3; // Número de repeticiones
     const interval = setInterval(() => {
       setIsAnimating(true);
@@ -32,10 +32,7 @@ function App() {
         setIsAnimating(false);
       }, 2000); // Duración de cada animación
 
-      animationCount += 1;
-      if (animationCount >= maxRepeats) {
-        clearInterval(interval);
-      }
+  
     }, 3000); // Intervalo entre repeticiones
 
     return () => clearInterval(interval);
@@ -106,8 +103,9 @@ function App() {
             <div className='tittle_premio'>
               <p>Cargando...</p>
             </div>
-
+            <h2 className='ganadores_title'>Ganadores:</h2>
             <div className='ganadores_container'>
+            
               <p>Isra</p>
               <p>Gera</p>
               <p>Isra</p>
