@@ -63,13 +63,19 @@ function App() {
          
            <div className='select_container'>
             <select value={cattegory} onChange={handleChange}>
-              <option defaultChecked value="0">Categoría:</option>
-              <option value="MOVILIDAD">MOVILIDAD</option>
-              <option value="MOVILIDAD_VIP">MOTOCICLETAS</option>
-              <option value="HOGAR">HOGAR</option>
-              <option value="HOGAR_VIP">PANTALLAS</option>
-              <option value="CONECTIVIDAD">CONECTIVIDAD</option>
-              <option value="CONECTIVIDAD_VIP">TELEFONÍA</option>
+            <option defaultChecked value="0">Categoría:</option>
+            <option value="HOGAR">HOGAR</option>
+            <option value="CONECTIVIDAD">CONECTIVIDAD</option>
+            <option value="MOVILIDAD">MOVILIDAD</option>
+            <option value="CONECTIVIDAD_VIP">TELEFONÍA</option>
+            <option value="HOGAR_VIP">PANTALLAS</option>
+            <option value="MOVILIDAD_VIP">MOTOCICLETAS</option>
+              
+           
+           
+            
+            
+           
             </select>
           </div>
 
