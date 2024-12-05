@@ -8,7 +8,7 @@ import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const { cattegory, data, handleChange } = useApis()
+  const { cattegory, data, handleChange, handleChangePrize, handleSort, winners, setCompletePrize, completePrize, } = useApis()
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -68,21 +68,24 @@ function App() {
             <select value={cattegory} onChange={handleChange}>
               <option defaultChecked value="0">Categoria:</option>
               <option value="MOVILIDAD">MOVILIDAD</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
+              <option value="MOVILIDAD_VIP">MOVILIDAD VIP</option>
+              <option value="HOGAR">HOGAR</option>
+              <option value="HOGAR_VIP">HOGAR VIP</option>
+              <option value="CONECTIVIDAD">CONECTIVIDAD</option>
+              <option value="CONECTIVIDAD_VIP">CONETIVIDAD VIP</option>
             </select>
           </div>
 
           <div className='select_container2'>
-            <select>
+            <select onChange={handleChangePrize}>
               <option selected value="0">Premio:</option>
-              {data?.prizes.map(prize => <option value={prize.id}>{prize.title}</option>)}
+              {data?.prizes.map(prize => <option onClick={()=>setCompletePrize(prize)} value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 
 
             <div className='btn_sortear_container'>
-              <button className="button-42" role="button">Sortear</button>
+              <button className="button-42" onClick={handleSort} role="button">Sortear</button>
             </div>
             <div 
              className={`esfera_container  animate__animated ${isAnimating ? 'animate__bounce' : ''}`}
@@ -104,18 +107,9 @@ function App() {
             <h2 className='ganadores_title'>Ganadores:</h2>
             <div className='ganadores_container'>
             
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
-              <p>Isra</p>
-              <p>Gera</p>
+              {
+                winners?.map(winner => <p>{winner.name}</p>)
+              }
             </div>
           </div>
         </div>
