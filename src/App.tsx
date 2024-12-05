@@ -82,7 +82,7 @@ function App() {
           <div className='select_container2'>
             <select onChange={handleChangePrize}>
               <option selected value="0">Premio:</option>
-              {categories?.prizes.map(prize => <option value={prize.id}>{prize.title}</option>)}
+              {categories?.prizes.sort((a,b) => ((+a.order) - (+b.order))).map(prize => <option value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 
