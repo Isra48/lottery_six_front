@@ -1,6 +1,6 @@
 body{
   background-color: #910000;
-  background-image: url('public/Back.png');
+  background-image: url('/Back.png');
   background-repeat: no-repeat;
   background-size: cover;
 
