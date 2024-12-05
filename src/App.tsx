@@ -4,9 +4,11 @@ import 'animate.css';
 import Tittle from './assets/tittle.png'
 import Esfera from './assets/esfera.png'
 import Logos from './assets/logos.png'
+import useApis from './useApis';
 
 function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const { cattegory, data, handleChange } = useApis()
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -38,8 +40,6 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-
-
   return (
     <>
       {isSmallScreen ? (
@@ -65,9 +65,9 @@ function App() {
             </div>
          
            <div className='select_container'>
-            <select>
-              <option selected value="0">Categoria:</option>
-              <option value="1">No Wrapper</option>
+            <select value={cattegory} onChange={handleChange}>
+              <option defaultChecked value="0">Categoria:</option>
+              <option value="MOVILIDAD">MOVILIDAD</option>
               <option value="2">No JS</option>
               <option value="3">Nice!</option>
             </select>
@@ -76,9 +76,7 @@ function App() {
           <div className='select_container2'>
             <select>
               <option selected value="0">Premio:</option>
-              <option value="1">No Wrapper</option>
-              <option value="2">No JS</option>
-              <option value="3">Nice!</option>
+              {data?.prizes.map(prize => <option value={prize.id}>{prize.title}</option>)}
             </select>
           </div>
 
