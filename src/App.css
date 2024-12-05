@@ -185,12 +185,43 @@ select {
 }
 .tittle_premio{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 2em;
   color: white;
   font-size: 1.2em;
   background-color: #121822;
   border-radius: 16px;
+}
+
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: #2d3748; /* Fondo de la barra */
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 1em;
+}
+
+.progress-bar-inner {
+
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background-color: #4caf50; /* Color de la barra de progreso */
+  border-radius: 16px;
+  animation: progressAnimation 5s linear ;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0;
+  }
+ 
+  100% {
+    width: 100%;
+  }
 }
 .ganadores_title{
   color: #f9f9f9;
