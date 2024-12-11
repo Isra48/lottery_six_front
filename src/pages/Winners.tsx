@@ -1,6 +1,6 @@
 import  { useRef } from 'react';
 import * as XLSX from 'xlsx'; // Importar SheetJS
-import './Winners.css'
+import './winners.css'
 import Card from '../components/card'
 import { winners } from '../mocks/winners.mock'
 
