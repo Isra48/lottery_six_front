@@ -1,0 +1,279 @@
+body{
+    object-fit: cover;
+
+
+}
+
+
+.container_father {
+    margin-top: 1em;
+    display: flex;
+  justify-content: space-between;
+  padding: 1em 2em;
+  background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+  border-radius: 15px; /* Bordes redondeados */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para resaltar */
+  height: 100%;
+  
+}
+
+
+@media screen and (max-width: 768px) {
+    .container_father {
+      flex-direction: column-reverse;
+      align-items: center;
+      margin: 0;
+      gap: 2em;
+      padding: 1em 1em;
+    
+      
+    }
+  }
+    
+
+/*///////////list styles/////////////////*/
+
+.list_container{
+    display: flex;
+  
+
+}
+  .card {
+  background-color: var(--cardColor);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 4px;
+  color: white;
+  list-style: none;
+}
+  
+
+.olcards,
+.olcards * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  ;
+}
+
+.olcards {
+
+    max-height: 90vh;
+    overflow-y: scroll;
+  list-style: none;
+  counter-reset: cardCount;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  --cardsGap: 1rem;
+  gap: var(--cardsGap);
+  padding-bottom: var(--cardsGap);
+}
+.olcards li {
+  counter-increment: cardCount;
+  display: flex;
+  color: white;
+  --labelOffset: 1rem;
+  --arrowClipSize: 1.5rem;
+  margin-top: var(--labelOffset);
+}
+
+.olcards li::before {
+  content: counter(cardCount, decimal-leading-zero);
+  background: white;
+  color: var(--cardColor);
+  font-size: 2em;
+  font-weight: 700;
+  transform: translateY(calc(-1 * var(--labelOffset)));
+  margin-right: calc(-1 * var(--labelOffset));
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 0.5em;
+}
+
+.olcards li .content {
+  background-color: var(--cardColor);
+  --inlinePadding: 1em;
+  --boxPadding: 0.5em;
+  display: grid;
+  padding: var(--boxPadding) calc(var(--inlinePadding) + var(--arrowClipSize))
+    var(--boxPadding) calc(var(--inlinePadding) + var(--labelOffset));
+  grid-template-areas:
+    "icon title"
+    "icon text";
+  gap: 0.25em 1em;
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--arrowClipSize)) 0,
+    100% 50%,
+    calc(100% - var(--arrowClipSize)) 100%,
+    calc(100% - var(--arrowClipSize)) calc(100% + var(--cardsGap)),
+    0 calc(100% + var(--cardsGap))
+  );
+  position: relative;
+}
+.olcards li .content::before {
+  content: "";
+  position: absolute;
+  width: var(--labelOffset);
+  height: var(--labelOffset);
+  background: var(--cardColor);
+  left: 0;
+  bottom: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  filter: brightness(0.75);
+}
+.olcards li .content::after {
+  content: "";
+  position: absolute;
+
+  /*width: var(--cardsGap); */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.25), transparent 50%);
+  left: 0;
+  top: 100%;
+}
+.olcards li .icon {
+  grid-area: icon;
+  align-self: center;
+  font-size: 2em;
+}
+.olcards li .content .title {
+  grid-area: title;
+  font-size: 1.25em;
+  /* font-weight: 700; */
+}
+.olcards li .content .text {
+  grid-area: text;
+}
+/*///////////btn download styles/////////////////*/
+
+
+
+.btn_container{
+    width: 50%;
+    display: flex;
+ 
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+    h2{
+        color: white;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .btn_container{
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h2{
+            color:#f2f2f2 ;
+
+            font-size: 1.2em;
+        }
+    }
+  }
+
+  .button-37 {
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    outline: 0;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-37:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .button-37 {
+      padding: 10px 30px;
+    }
+  }
+    
+
+
+.button-37 {
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    outline: none;
+    outline: 0;
+    padding: 10px 25px;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-37:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+  }
+  
+  @media (min-width: 768px) {
+    .button-37 {
+      padding: 10px 30px;
+    }
+  }
+
+  .back-to-top {
+    display: none; /* Ocultar por defecto */
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #13aa52;
+    color: #fff;
+    padding: 0.75em 1em;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.back-to-top:hover {
+    background-color: #0f8d42;
+    transform: translateY(-3px);
+}
+
+/* Mostrar solo en dispositivos móviles */
+@media (max-width: 768px) {
+    .back-to-top {
+        display: block;
+    }
+}
